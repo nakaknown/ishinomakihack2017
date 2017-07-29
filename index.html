@@ -141,6 +141,60 @@
                      <table>
    </script>
 
+   <script id="TroubleTemplate" type="text/ractive">
+    <h1 on-click="@this.showNext()">Trouble page</h1>
+                         <table>
+                         <tr>
+                         <th>
+                             お悩みタイトル
+                         </th>
+                         <td>
+                             <input type="text" name="onayami_title" value="">
+                         </td>
+                         </tr>
+                         <tr>
+                         <th>
+                             お悩み内容
+                         </th>
+                         <td>
+                             <input type="text" name="onayami_naiyou" value="">
+                         </td>
+                         </tr>
+                     <tr>
+                         <td >
+                         <input type="button" onClick="" value="記事を投稿する">
+                         </td >
+                     </tr>
+                     <table>
+   </script>
+
+   <script id="PostTemplate" type="text/ractive">
+    <h1 on-click="@this.showNext()">Post page</h1>
+                     <table>
+                     <tr>
+                         <th>
+                             タイトル
+                         </th>
+                         <td>
+                             <input type="text" name="post_title" value="">
+                         </td>
+                     </tr>
+                     <tr>
+                         <th>
+                             本文
+                         </th>
+                         <td>
+                             <input type="password" name="post_text" value="">
+                         </td>
+                     </tr>
+                     <tr>
+                         <td >
+                             <input type="submit" on-click="post_post" value="記事投稿">
+                         </td>
+                     </tr>
+                     </table>
+   </script>
+   
   <link rel="stylesheet" type="text/css" href="./css/main.css"/>
   <script src="./js/KiiSDK.min.js"></script>
   <script src="./js/ractive.js"></script>
