@@ -2,14 +2,163 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title></title>
 </head>
 <body>
   <section id="container"></section>
   <script id="topTemplate" type="text/ractive">
-    <h1 on-click="@this.showNext()">Top page</h1>
+    <section class="top">
+      <header>
+        <h1 on-click="@this.showNext()">Top page</h1>
+        {{#if loggedIn}}
+        <label on-click="@this.logout()">ログアウト</label>
+        {{else}}
+        <label on-click="@this.showSignup()">新規登録</label>
+        {{/if}}
+      </header>
+      <div class=center><img src="./img/logo.png" class=logo_img/></div>
+      <section class="card">
+        <h2>人気ブラック記事</h2>
+        {{# list}}
+        <div class="list_item line1" on-click="@this.showArticle(.)"> {{get("title")}} ({{get("point")}})</div>
+        {{/}}
+        <button class="button match_width" on-click="@this.newArticle()">記事投稿</button>
+      </section>
+      <section class="card">
+          <div class=center><img src="./img/trouble.png" class=trouble_img /></div>
+        <h2>お悩み相談室</h2>
+        <button class="button match_width" on-click="@this.showTrouble()">悩みを打ち明ける</button>
+      </section>
+    </section>
+  </script>
+    
+    
+   <script id="LoginTemplate" type="text/ractive">
+     <header class="toolbar">
+       
+     </header>
+                     <table>
+                     <tr>
+                         <th>
+                             E-MAIL
+                         </th>
+                         <td>
+                             <input type="text" name="user_id" value="{{email}}">
+                         </td>
+                     </tr>
+                     <tr>
+                         <th>
+                             パスワード
+                         </th>
+                         <td>
+                             <input type="password" name="password" value="{{password}}">
+                         </td>
+                     </tr>
+                     <tr>
+                         <td colspan="2">
+                             <div class=center><button class="btn1" on-click="@this.showNext()" >login</button></div>
+                         </td>
+                     </tr>
+                     <tr>
+                         <td  colspan="2">
+                         <div class=center><button class="btn1" on-Click="" >新規登録</button></div>
+                         </td >
+                     </tr>
+             </table>
   </script>
 
+   <script id="NewUserTemplate" type="text/ractive">
+        <div align="center">
+                     <table>
+                     <tr>
+                         <th>
+                             登録メールアドレス
+                         </th>
+                         <td>
+                             <input type="text" name="add_user_id" value={{email}}>
+                         </td>
+                     </tr>
+                     <tr>
+                         <th>
+                             パスワード
+                         </th>
+                         <td>
+                             <input type="password" name="add_password"  value={{password}}>
+                         </td>
+                     </tr>
+                     <tr>
+                         <td  colspan="2" >
+                                   <div class=center><button class="btn1">登録</button></div>
+                         </td>
+                     </tr>
+             </table>
+    </div>
+  </script>
+
+   <script id="ListTemplate" type="text/ractive">
+  </script>
+
+   <script id="ArticleTemplate" type="text/ractive">
+    <h2>{{title}}</h2>
+    <p>{{text}}</p><br>
+    <p>累計ブラックポイント:{{point}}</p><br>
+    <p>
+      <button class="btn2" on-click="@this.addPoint()">ブラックだね</button><br><br>
+      <input type="text" name="comment" value="{{comment}}"><br><br>
+      <button class="btn1" on-click="@this.sendComment()">投稿する</button><br><br>
+    </p>
+    <h2>コメント一覧</h2><br>
+     {{# list}}
+        <div> {{get("comment")}} </div>
+        {{/}}
+    
+  </script>
+
+
+   <script id="PostTemplate" type="text/ractive">
+    <h1 text>Post page</h1>
+                     <table>
+                     <tr>
+                         <th>
+                             タイトル
+                         </th>
+                         <td>
+                             <input type="text" name="post_title" value="{{title}}">
+                         </td>
+                     </tr>
+                     <tr>
+                         <th>
+                             本文
+                         </th>
+                         <td>
+                             <input type="text" name="post_text" value="{{text}}">
+                         </td>
+                     </tr>
+                     <tr>
+                         <td >
+                             <button on-click="@this.showNext()" >記事投稿</button>
+                         </td>
+                     </tr>
+                     </table>
+  </script>
+
+   <script id="TroubleTemplate" type="text/ractive">
+    <h1 on-click="@this.showNext()">Trouble page</h1>
+    <p>text{{# list}}
+    {{#if key == 1}}
+    	<p><img src = "./img/ic_user.png">{{value}}</p>
+    {{else}}
+    	<p><img src = "./img/ic_god.png">{{value}}</p>
+    {{/if}}
+    	{{/}}</p>
+    <textarea cols="横幅" rows="行数" value= "{{text}}"></textarea>
+    <button on-click="@this.send()">投稿</button>
+    <p></p>
+  </script>
+
+  <link rel="stylesheet" type="text/css" href="./css/main.css"/>
+  <script src="./js/KiiSDK.min.js"></script>
   <script src="./js/ractive.js"></script>
   <!-- for backbone.js -->
   <script src="./js/underscore-min.js"></script>
